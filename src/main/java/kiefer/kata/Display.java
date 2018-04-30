@@ -5,11 +5,15 @@ package kiefer.kata;
  */
 public class Display {
 
+    public static final String LIVE_CELL = "()";
+    public static final String DEAD_CELL = "  ";
+    public static final String NEW_LINE = System.getProperty("line.separator");
+
     public String cellString(Cell cell) {
         if (cell.isAlive()) {
-            return "[x]";
+            return LIVE_CELL;
         } else {
-            return "   ";
+            return DEAD_CELL;
         }
     }
 
@@ -25,7 +29,7 @@ public class Display {
         StringBuilder sb = new StringBuilder();
         for (Cell[] row : grid.rows()) {
             sb.append(rowString(row));
-            sb.append("\n");
+            sb.append(NEW_LINE);
         }
         return sb.toString();
     }

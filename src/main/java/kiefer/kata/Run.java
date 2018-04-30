@@ -1,13 +1,15 @@
 package kiefer.kata;
 
+import java.util.Random;
+
 /**
  * Created by moose on 4/29/2018.
  */
 public class Run {
 
     public static void main(String[] args) throws Exception {
-        int rows = 30;
-        int cols = 40;
+        int rows = 50;
+        int cols = 80;
         Grid grid = setUp(rows, cols);
         Display display = new Display();
         String output = display.gridString(grid);
@@ -30,17 +32,24 @@ public class Run {
 
     private static Grid setUp(int rows, int cols) {
         Grid grid = new Grid(cols, rows);
-        grid.rows()[1][12].isAlive(true);
-        grid.rows()[1][13].isAlive(true);
-        grid.rows()[1][14].isAlive(true);
-        grid.rows()[2][13].isAlive(true);
-        grid.rows()[4][7].isAlive(true);
-        grid.rows()[4][8].isAlive(true);
-        grid.rows()[4][9].isAlive(true);
-        grid.rows()[5][9].isAlive(true);
-        grid.rows()[5][10].isAlive(true);
-        grid.rows()[5][11].isAlive(true);
-        grid.rows()[6][9].isAlive(true);
+        Random ran = new Random();
+        int seedRow = 0;
+        int seedCol = 0;
+        for (int i = 0; i < 20; ++i) {
+            seedRow = ran.nextInt(rows);
+            seedCol = ran.nextInt(cols);
+            if (seedCol > cols/2) {
+                seedCol = seedCol - 3;
+            }
+            if (seedRow > rows / 2) {
+                grid.rows()[seedRow - 1][seedCol].isAlive(true);
+            } else {
+                grid.rows()[seedRow + 1][seedCol].isAlive(true);
+            }
+            grid.rows()[seedRow][seedCol].isAlive(true);
+            grid.rows()[seedRow][seedCol + 1].isAlive(true);
+            grid.rows()[seedRow][seedCol + 2].isAlive(true);
+        }
         return grid;
     }
 }

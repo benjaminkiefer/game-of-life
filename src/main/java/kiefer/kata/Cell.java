@@ -36,11 +36,11 @@ public class Cell {
 
     public boolean spontaneousGeneration() {
         int aliveNeighbors = aliveNeighborCount();
-        boolean luck = false;
+        boolean lifeFindsAWay = false;
         if (aliveNeighborCount() > 0){
-            luck = (ran.nextInt(1000) == 1);
+            lifeFindsAWay = (ran.nextInt(1000) == 1);
         }
-        return aliveNeighbors == 3 || luck;
+        return aliveNeighbors == 3 || lifeFindsAWay;
     }
 
     public void addNeighbor(Cell neighbor) {
